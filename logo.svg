@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Signo Visual - Minha Padaria -->
+  <!-- ÍCONE: forma de pão (semelhança visual com o objeto real) -->
+  <ellipse cx="60" cy="72" rx="42" ry="22" fill="#d2a86a" stroke="#8b5a2b" stroke-width="2"/>
+  <!-- cortes no pão (índice: marcas reais deixadas pelo padeiro) -->
+  <path d="M35 65 Q42 58 50 65" stroke="#8b5a2b" stroke-width="2" fill="none"/>
+  <path d="M52 63 Q60 56 68 63" stroke="#8b5a2b" stroke-width="2" fill="none"/>
+  <path d="M70 65 Q78 58 86 65" stroke="#8b5a2b" stroke-width="2" fill="none"/>
+  <!-- ÍNDICE: vapor saindo (indica calor/fresco do forno) -->
+  <path d="M45 45 Q42 38 46 32 Q50 26 46 20" stroke="#a87a4a" stroke-width="2.5" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <path d="M60 42 Q57 35 61 29 Q65 23 61 17" stroke="#a87a4a" stroke-width="2.5" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <path d="M75 45 Q72 38 76 32 Q80 26 76 20" stroke="#a87a4a" stroke-width="2.5" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <!-- SÍMBOLO: trigo estilizado (convenção cultural = padaria) -->
+  <line x1="22" y1="92" x2="30" y2="80" stroke="#8b5a2b" stroke-width="1.5"/>
+  <ellipse cx="26" cy="84" rx="2" ry="4" fill="#d4a017" transform="rotate(-35 26 84)"/>
+  <ellipse cx="29" cy="80" rx="2" ry="4" fill="#d4a017" transform="rotate(-35 29 80)"/>
+  <line x1="98" y1="92" x2="90" y2="80" stroke="#8b5a2b" stroke-width="1.5"/>
+  <ellipse cx="94" cy="84" rx="2" ry="4" fill="#d4a017" transform="rotate(35 94 84)"/>
+  <ellipse cx="91" cy="80" rx="2" ry="4" fill="#d4a017" transform="rotate(35 91 80)"/>
+  <!-- base / chão -->
+  <line x1="15" y1="100" x2="105" y2="100" stroke="#8b5a2b" stroke-width="1.5" opacity="0.4"/>
+</svg>

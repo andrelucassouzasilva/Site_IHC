@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Padaria - Tradição e Sabor</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" type="image/svg+xml" href="./logo.svg">
+</head>
+
+<body>
+    <!-- Q2-A: Visibilidade do status do sistema -->
+    <div class="status-bar">
+        <span class="status-dot"></span>
+        <span>Aberto agora • Entregas em até 40 min</span>
+    </div>
+
+    <header>
+        <a href="#home" class="header-logo" aria-label="Página inicial - Minha Padaria">
+            <img src="logo.svg" alt="Logo Minha Padaria">
+            <span class="logo-text">Minha Padaria</span>
+        </a>
+
+        <nav aria-label="Menu principal">
+            <ul class="menu">
+                <li><a href="#doces" aria-current="page">🍩 Doces</a></li>
+                <li><a href="#salgados">🥐 Salgados</a></li>
+                <li><a href="#encomendas">🎂 Encomendas</a></li>
+                <li><a href="#contato">📞 Contato</a></li>
+                <li><a href="#trabalhe">💼 Trabalhe Conosco</a></li>
+                <li><a href="#conta" class="btn-conta">👤 Minha Conta</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="busca-wrapper">
+        <form class="busca" onsubmit="event.preventDefault(); alert('Buscando: ' + document.getElementById('q').value);">
+            <span class="busca-icon" aria-hidden="true">🔍</span>
+            <input type="search" id="q" placeholder="Buscar produtos (ex: pão francês, bolo, café...)" aria-label="Buscar produtos">
+            <button type="submit" class="btn-primario">Buscar</button>
+        </form>
+    </div>
+
+    <section class="destaque" id="home">
+        <h1>Minha Padaria</h1>
+        <div class="destaque-resumo">
+            <img src="img1.jpg" alt="Vitrine da Minha Padaria com pães e doces frescos">
+            <p>Na Minha Padaria, a tradição e o sabor caminham juntos. Trabalhamos com produtos
+                fresquinhos, feitos diariamente para você começar bem o seu dia.
+            </p>
+        </div>
+        <a href="#cardapio" class="btn-primario btn-cta">Ver Cardápio ➜</a>
+    </section>
+
+    <section class="cardapio" id="cardapio">
+        <h2>Cardápio</h2>
+        <img src="padaria02.png" alt="Variedade de lanches da padaria">
+
+        <h3 id="salgados">🥪 Lanches</h3>
+        <div class="card" id="lista-lanches"></div>
+
+        <h3 id="doces">🍱 Refeições</h3>
+        <div class="card" id="lista-refeicoes"></div>
+    </section>
+
+    <button class="carrinho-fab" onclick="abrirCarrinho()" aria-label="Abrir carrinho">
+        🛒 <span class="badge" id="badge">0</span>
+    </button>
+
+    <!-- Carrinho -->
+    <div class="modal" id="modalCarrinho" hidden>
+        <div class="modal-box modal-box-lg">
+            <h3>🛒 Seu Carrinho</h3>
+            <div id="carrinhoLista" class="carrinho-lista">
+                <p class="carrinho-vazio">Seu carrinho está vazio.</p>
+            </div>
+            <div class="carrinho-total">
+                <strong>Total:</strong> <span id="carrinhoTotal">R$ 0,00</span>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secundario" onclick="fecharCarrinho()">Continuar comprando</button>
+                <button class="btn-primario" onclick="abrirConfirmacao()">Finalizar pedido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmação -->
+    <div class="modal" id="modalConfirma" hidden>
+        <div class="modal-box">
+            <h3>Confirmar pedido?</h3>
+            <p id="confirmaMsg"></p>
+            <div class="modal-actions">
+                <button class="btn-secundario" onclick="fecharConfirmacao()">Cancelar</button>
+                <button class="btn-primario" onclick="confirmarPedido()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" hidden>Item adicionado ✓</div>
+
+    <footer id="contato">
+        <p>📍 Rua das Padarias, 123 - Cotia/SP &nbsp;|&nbsp; 📞 (11) 1234-5678</p>
+        <p>&copy; 2026 Minha Padaria - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const produtos = {
+            lanches: [
+                { id: 'l1', nome: 'Lanche do Forno', desc: 'Pão sequinho, recheio quentinho. Servido com molho da casa.', preco: 12.90 },
+                { id: 'l2', nome: 'Lanche Natural', desc: 'Pão integral, frango, alface, tomate e cenoura ralada.', preco: 10.50 },
+                { id: 'l3', nome: 'Lanche Clássico', desc: 'Hambúrguer, queijo, alface, tomate e maionese da casa.', preco: 15.00 },
+                { id: 'l4', nome: 'Lanche Bacon & Queijo', desc: 'Hambúrguer artesanal, bacon crocante e queijo prato derretido.', preco: 18.00 },
+            ],
+            refeicoes: [
+                { id: 'r1', nome: 'Frango Assado com Batatas', desc: 'Frango temperado e assado, acompanha batatas rústicas.', preco: 24.90 },
+                { id: 'r2', nome: 'Feijoada', desc: 'Tradicional feijoada com arroz, couve, farofa e laranja.', preco: 29.90 },
+                { id: 'r3', nome: 'Marmita Fit', desc: 'Arroz integral, frango grelhado e legumes no vapor.', preco: 22.00 },
+                { id: 'r4', nome: 'Strogonoff de Carne', desc: 'Carne em cubos ao molho cremoso, arroz e batata palha.', preco: 26.90 },
+            ]
+        };
+
+        const carrinho = {}; // id -> { produto, qtd }
+        const fmt = v => 'R$ ' + v.toFixed(2).replace('.', ',');
+
+        function renderCardapio() {
+            const make = p => `
+                <div class="card-food">
+                    <h4>${p.nome}</h4>
+                    <p>${p.desc}</p>
+                    <span class="preco">${fmt(p.preco)}</span>
+                    <div class="qtd-control" aria-label="Selecionar quantidade">
+                        <button type="button" class="qtd-btn" onclick="mudarQtd('${p.id}', -1)" aria-label="Diminuir">−</button>
+                        <input type="number" id="qtd-${p.id}" class="qtd-input" value="1" min="1" max="99" aria-label="Quantidade">
+                        <button type="button" class="qtd-btn" onclick="mudarQtd('${p.id}', 1)" aria-label="Aumentar">+</button>
+                    </div>
+                    <button class="btn-primario" onclick="adicionar('${p.id}')">Adicionar ao pedido</button>
+                </div>`;
+            document.getElementById('lista-lanches').innerHTML = produtos.lanches.map(make).join('');
+            document.getElementById('lista-refeicoes').innerHTML = produtos.refeicoes.map(make).join('');
+        }
+
+        function acharProduto(id) {
+            return [...produtos.lanches, ...produtos.refeicoes].find(p => p.id === id);
+        }
+
+        function mudarQtd(id, delta) {
+            const input = document.getElementById('qtd-' + id);
+            let v = parseInt(input.value, 10) || 1;
+            v = Math.max(1, Math.min(99, v + delta));
+            input.value = v;
+        }
+
+        function adicionar(id) {
+            const input = document.getElementById('qtd-' + id);
+            const qtd = Math.max(1, parseInt(input.value, 10) || 1);
+            const produto = acharProduto(id);
+            if (!carrinho[id]) carrinho[id] = { produto, qtd: 0 };
+            carrinho[id].qtd += qtd;
+            atualizarBadge();
+            input.value = 1;
+            mostrarToast(`${qtd}× ${produto.nome} adicionado ✓`);
+        }
+
+        function atualizarBadge() {
+            const total = Object.values(carrinho).reduce((s, i) => s + i.qtd, 0);
+            const badge = document.getElementById('badge');
+            badge.textContent = total;
+            badge.classList.add('pulse');
+            setTimeout(() => badge.classList.remove('pulse'), 400);
+        }
+
+        function mostrarToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.hidden = false;
+            clearTimeout(window._t);
+            window._t = setTimeout(() => t.hidden = true, 2000);
+        }
+
+        function abrirCarrinho() {
+            renderCarrinho();
+            document.getElementById('modalCarrinho').hidden = false;
+        }
+        function fecharCarrinho() { document.getElementById('modalCarrinho').hidden = true; }
+
+        function renderCarrinho() {
+            const lista = document.getElementById('carrinhoLista');
+            const itens = Object.entries(carrinho).filter(([, i]) => i.qtd > 0);
+            if (itens.length === 0) {
+                lista.innerHTML = '<p class="carrinho-vazio">Seu carrinho está vazio.</p>';
+                document.getElementById('carrinhoTotal').textContent = fmt(0);
+                return;
+            }
+            let total = 0;
+            lista.innerHTML = itens.map(([id, item]) => {
+                const sub = item.produto.preco * item.qtd;
+                total += sub;
+                return `
+                    <div class="carrinho-item">
+                        <div class="carrinho-info">
+                            <strong>${item.produto.nome}</strong>
+                            <span class="carrinho-sub">${item.qtd} × ${fmt(item.produto.preco)} = <b>${fmt(sub)}</b></span>
+                        </div>
+                        <div class="carrinho-acoes">
+                            <button class="qtd-btn" onclick="mudarCarrinho('${id}', -1)" aria-label="Diminuir">−</button>
+                            <span class="qtd-display">${item.qtd}</span>
+                            <button class="qtd-btn" onclick="mudarCarrinho('${id}', 1)" aria-label="Aumentar">+</button>
+                            <button class="btn-remover" onclick="removerItem('${id}')" aria-label="Remover">🗑️</button>
+                        </div>
+                    </div>`;
+            }).join('');
+            document.getElementById('carrinhoTotal').textContent = fmt(total);
+        }
+
+        function mudarCarrinho(id, delta) {
+            if (!carrinho[id]) return;
+            carrinho[id].qtd += delta;
+            if (carrinho[id].qtd <= 0) delete carrinho[id];
+            atualizarBadge();
+            renderCarrinho();
+        }
+
+        function removerItem(id) {
+            if (!confirm('Remover este item do carrinho?')) return;
+            delete carrinho[id];
+            atualizarBadge();
+            renderCarrinho();
+        }
+
+        function abrirConfirmacao() {
+            const totalItens = Object.values(carrinho).reduce((s, i) => s + i.qtd, 0);
+            if (totalItens === 0) { alert('Seu carrinho está vazio.'); return; }
+            const totalValor = Object.values(carrinho).reduce((s, i) => s + i.qtd * i.produto.preco, 0);
+            document.getElementById('confirmaMsg').textContent =
+                `${totalItens} ${totalItens === 1 ? 'item' : 'itens'} • Total ${fmt(totalValor)}. Deseja confirmar?`;
+            document.getElementById('modalConfirma').hidden = false;
+        }
+        function fecharConfirmacao() { document.getElementById('modalConfirma').hidden = true; }
+        function confirmarPedido() {
+            alert('Pedido confirmado! Em breve entraremos em contato.');
+            for (const k of Object.keys(carrinho)) delete carrinho[k];
+            atualizarBadge();
+            renderCarrinho();
+            fecharConfirmacao();
+            fecharCarrinho();
+        }
+
+        renderCardapio();
+    </script>
+</body>
+
+</html>

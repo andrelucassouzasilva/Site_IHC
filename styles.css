@@ -1,0 +1,437 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdf8ef;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Q2-A: Visibilidade do status do sistema */
+.status-bar {
+    background-color: #2e7d32;
+    color: #fff;
+    text-align: center;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.status-dot {
+    width: 10px; height: 10px;
+    background: #8bc34a;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(139, 195, 74, 0.7);
+    animation: pulse 1.6s infinite;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(139,195,74,.7); }
+    70% { box-shadow: 0 0 0 8px rgba(139,195,74,0); }
+    100% { box-shadow: 0 0 0 0 rgba(139,195,74,0); }
+}
+
+header {
+    background-color: #fff8ec;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #d2691e;
+}
+.header-logo img { height: 48px; width: 48px; }
+.logo-text { font-size: 1.4em; font-weight: bold; font-family: 'Georgia', serif; }
+
+nav ul.menu {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+/* Q1: Affordance - links com aparência clicável */
+nav ul.menu a {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #5a3a1a;
+    background: transparent;
+    transition: all .2s ease;
+    cursor: pointer;
+    font-weight: 500;
+}
+nav ul.menu a:hover {
+    background-color: #d2691e;
+    color: #fff;
+    transform: translateY(-1px);
+}
+/* Q2-B: Consistência - "Minha Conta" em destaque, mas mesma família visual */
+nav ul.menu a.btn-conta {
+    background: #d2691e;
+    color: #fff;
+}
+nav ul.menu a.btn-conta:hover { background: #a8521a; }
+
+/* Q1: Affordance - busca */
+.busca-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    background: #fff8ec;
+}
+.busca {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 2px solid #e8d3b0;
+    border-radius: 30px;
+    padding: 4px 8px 4px 16px;
+    width: 100%;
+    max-width: 600px;
+    transition: border-color .2s;
+}
+.busca:focus-within { border-color: #d2691e; }
+.busca-icon { font-size: 1.1em; margin-right: 8px; }
+.busca input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    padding: 10px 6px;
+    font-size: 1em;
+    background: transparent;
+}
+
+/* Q1/Q2-B: Botões consistentes - aparência claramente clicável */
+.btn-primario {
+    background-color: #d2691e;
+    color: #fff;
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all .2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn-primario:hover {
+    background-color: #a8521a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.btn-primario.ok { background: #2e7d32; }
+.btn-secundario {
+    background: #f1f1f1;
+    color: #333;
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-secundario:hover { background: #ddd; }
+
+.btn-cta {
+    margin-top: 20px;
+    font-size: 1.1em;
+    padding: 14px 28px;
+}
+
+.destaque {
+    text-align: center;
+    padding: 40px 20px;
+    margin: 20px;
+    background-color: #f8f3e2;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.destaque h1 {
+    font-family: 'Georgia', serif;
+    font-size: 3em;
+    color: #d2691e;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.destaque p {
+    font-family: 'Georgia', serif;
+    font-size: 1.2em;
+    color: #333;
+    line-height: 1.6;
+    margin: 20px 0;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.destaque img {
+    width: 70%;
+    max-width: 600px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.destaque-resumo {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.cardapio {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cardapio h2 {
+    font-family: 'Georgia', serif;
+    font-size: 2.2em;
+    color: #d2691e;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.cardapio h3 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    margin-top: 24px;
+    font-weight: bold;
+    color: #5a3a1a;
+    align-self: flex-start;
+    padding-left: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 16px;
+    justify-content: center;
+}
+
+.cardapio img {
+    width: 70%;
+    max-width: 900px;
+    border-radius: 10px;
+}
+
+.card h4 {
+    font-family: 'Arial', sans-serif;
+    color: #d2691e;
+    margin-bottom: 8px;
+}
+
+/* Q1: Affordance - card com aparência de "item interativo" */
+.card-food {
+    width: 260px;
+    background: #fff;
+    border: 1px solid #ead7b6;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    transition: transform .2s, box-shadow .2s;
+}
+.card-food:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+.card-food p { font-size: 0.95em; color: #555; flex: 1; }
+.preco {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2e7d32;
+    margin: 8px 0;
+}
+
+/* Q1: Carrinho fixo */
+.carrinho-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #d2691e;
+    color: #fff;
+    border: 0;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    font-size: 1.6em;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 50;
+    transition: transform .2s;
+}
+.carrinho-fab:hover { transform: scale(1.08); }
+.badge {
+    position: absolute;
+    top: 4px; right: 4px;
+    background: #c62828;
+    color: #fff;
+    font-size: 0.7em;
+    border-radius: 50%;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold;
+}
+.badge.pulse { animation: badgePulse .4s ease; }
+@keyframes badgePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+/* Corrige: atributo hidden deve sempre esconder */
+[hidden] { display: none !important; }
+
+/* Controle de quantidade no cardápio */
+.qtd-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 8px 0;
+}
+.qtd-btn {
+    width: 32px; height: 32px;
+    border: 1px solid #d2691e;
+    background: #fff;
+    color: #d2691e;
+    border-radius: 50%;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .15s;
+}
+.qtd-btn:hover { background: #d2691e; color: #fff; }
+.qtd-input {
+    width: 50px;
+    text-align: center;
+    padding: 6px;
+    border: 1px solid #e8d3b0;
+    border-radius: 6px;
+    font-size: 1em;
+}
+.qtd-input::-webkit-inner-spin-button,
+.qtd-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* Carrinho */
+.modal-box-lg { max-width: 560px; }
+.carrinho-lista {
+    text-align: left;
+    max-height: 50vh;
+    overflow-y: auto;
+    margin: 16px 0;
+    padding-right: 4px;
+}
+.carrinho-vazio { text-align: center; color: #888; padding: 24px; }
+.carrinho-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+}
+.carrinho-item:last-child { border-bottom: 0; }
+.carrinho-info { display: flex; flex-direction: column; flex: 1; min-width: 160px; }
+.carrinho-sub { font-size: 0.9em; color: #666; margin-top: 4px; }
+.carrinho-acoes { display: flex; align-items: center; gap: 6px; }
+.qtd-display {
+    min-width: 28px;
+    text-align: center;
+    font-weight: bold;
+}
+.btn-remover {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 6px;
+    border-radius: 6px;
+    transition: background .15s;
+}
+.btn-remover:hover { background: #ffebee; }
+.carrinho-total {
+    text-align: right;
+    font-size: 1.2em;
+    padding: 12px 0;
+    border-top: 2px solid #d2691e;
+    margin-top: 12px;
+}
+.carrinho-total span { color: #2e7d32; font-weight: bold; margin-left: 8px; }
+
+/* Q2-C: Modal de prevenção de erros */
+.modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100;
+}
+.modal-box {
+    background: #fff;
+    padding: 28px;
+    border-radius: 12px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+}
+.modal-box h3 { color: #d2691e; margin-bottom: 12px; }
+.modal-box p { margin-bottom: 20px; }
+.modal-actions { display: flex; gap: 12px; justify-content: center; }
+
+/* Q2-A: Toast de feedback */
+.toast {
+    position: fixed;
+    bottom: 100px;
+    right: 24px;
+    background: #2e7d32;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 60;
+    animation: slideIn .3s ease;
+}
+@keyframes slideIn {
+    from { transform: translateX(120%); }
+    to { transform: translateX(0); }
+}
+
+footer {
+    background-color: #d2691e;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    margin-top: 40px;
+}
+footer p { margin: 4px 0; }
