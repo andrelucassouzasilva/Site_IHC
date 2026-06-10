@@ -1,6 +1,7 @@
 # Site - IHC
 
 Projeto simples de site para a disciplina de IHC.
+Com foco em convenções de affordance, heurísticas de Nielsen, semiótica de Peirce e benefício prático para o usuário.
 
 Conteúdo:
 - `Minha Padaria.html` — página principal do site.
